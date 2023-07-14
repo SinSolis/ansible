@@ -1,0 +1,9 @@
+---
+# defaults file for base-os
+
+packages:
+  - firewalld
+  - vim
+  - htop
+  - tree
+  - net-tools

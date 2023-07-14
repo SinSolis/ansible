@@ -1,0 +1,8 @@
+---
+# tasks file for base-os
+
+# apply base system updates
+- import_tasks: updates.yml
+
+# Setup base packages for os
+- import_tasks: packages.yml

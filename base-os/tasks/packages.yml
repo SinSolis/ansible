@@ -1,0 +1,9 @@
+---
+# copy prometheus tarball to target host
+
+- name: Install base packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - "{{ packages }}"
