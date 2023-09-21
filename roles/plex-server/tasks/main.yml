@@ -1,0 +1,13 @@
+---
+# tasks file for plex-servers
+
+# create accounts
+- import_tasks: accounts.yml
+
+# Setup base packages for os
+- import_tasks: vm-disk.yml
+
+# apply base system updates
+- import_tasks: plex.yml
+  #when: ansible_distribution == "Ubuntu"
+

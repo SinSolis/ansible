@@ -1,0 +1,17 @@
+---
+# tasks file for plex / ubuntu
+
+- name: Create group
+  group:
+    name: "{{ plex.group }}"
+    state: present
+
+- name: Create user
+  user:
+    name: "{{ plex.user }}"
+    comment: "account for plex service"  
+    create_home: yes
+    shell: /bin/false
+    group: "{{ plex.group }}"
+    groups: "{{ plex.group }}"
+    append: yes
