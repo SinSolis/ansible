@@ -7,3 +7,20 @@ packages:
   - htop
   - tree
   - net-tools
+
+lvm:
+  disks: "/dev/sdb,/dev/sdc,/dev/sdd"
+  lvm_vg: "plexcorevg"
+  lvm_vol: "plexcorevol"
+  grow_size: "100%FREE"
+
+plex:
+  softwaredir: "/opt/plex"
+  user: "root"
+  group: "root"
+  mode: "0755"
+
+firewall:
+  rules:
+    allow:
+      - 9090/tcp

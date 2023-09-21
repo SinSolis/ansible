@@ -6,3 +6,6 @@
 
 # Setup base packages for os
 - import_tasks: packages.yml
+
+# Setup base packages for os
+- import_tasks: vm-disk.yml
