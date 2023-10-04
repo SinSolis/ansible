@@ -5,3 +5,6 @@ controller ansible_connection=local
 node01
 node02
 plex01
+lab01
+lab02
+lab03
