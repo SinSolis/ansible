@@ -1,0 +1,166 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  vars:
+    url: "https://cdn.cribl.io/dl"
+    package_name: "cribl"
+    os: "linux"
+    version: "4.2.2"
+    build: "98ea44f1"
+    architecture: "x64"
+    extension: "tgz"
+    cribl_tarball_hash: "sha256:0969edf8fc0f4fa825b66929bf0cbc9b9f9c0d12be72aef2f26902a1b5714d9b"
+
+    cribl:
+      install_dir: "/opt/cribl-edge"
+      user: "cribl"
+      group: "cribl"
+      mode: "0755"
+
+    instance:
+      edge_mode: "managed-edge"
+      cribl_leader_host: "192.168.1.51"
+      cribl_leader_port: "4200"
+      cribl_leader_token: "criblmaster"
+      tls_option: "true"
+      resiliency_option: "none"
+      cribl_default_fleet: "default_fleet"
+
+  tasks:
+    - name: Create group
+      group:
+        name: cribl
+        state: present
+
+    - name: Create user
+      user:
+        name: cribl
+        comment: "account for cribl-edge service"  
+        create_home: yes
+        shell: /bin/sh
+        group: cribl
+        groups: cribl
+        append: yes
+
+    - name: Add cribl user to wheel if centos or redhat
+      user:
+        name: cribl
+        groups: wheel
+        append: yes
+      when: ansible_distribution == 'CentOS' or ansible_os_family == 'Red Hat'
+
+    - name: Check if cribl tarball exists on controller
+      stat:
+        path: "/tmp/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+      become: no
+      delegate_to: 127.0.0.1
+      register: tarball_result
+
+    - name: Download cribl tar ball with check (sha256) to controller
+      get_url:
+        url: "{{ url }}/{{ version }}/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+        dest: "/tmp/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+        checksum: "{{ cribl_tarball_hash }}"
+      become: no
+      delegate_to: 127.0.0.1
+      when: not tarball_result.stat.exists
+
+    - name: Check if cribl tarball exists on target host
+      stat:
+        path: "/tmp/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+      register: remote_tarball_result
+
+    - name: Copy cribl tarball to target host if it does not exists
+      copy:
+        src: "/tmp/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+        dest: "/tmp/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+        owner: "{{ cribl.user }}"
+        group: "{{ cribl.group }}"
+      when: not remote_tarball_result.stat.exists
+
+    - name: Create cribl edge dir
+      file:
+        path: "{{ cribl.install_dir }}"
+        state: directory
+        owner: "{{ cribl.user }}"
+        group: "{{ cribl.group }}"
+        recurse: yes
+        mode: 0755
+
+    - name: Unarchive the cribl software to /opt/cribl-edge
+      unarchive:
+        src: "/tmp/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+        dest: /opt/cribl-edge
+        remote_src: yes
+        owner: "{{ cribl.user }}"
+        group: "{{ cribl.group }}"
+        extra_opts: [--strip-components=1] 
+
+    - name: Creates directory
+      file:
+        path: "{{ cribl.install_dir}}/local/_system/"
+        state: directory
+        owner: "{{ cribl.user }}"
+        group: "{{ cribl.group }}"
+        mode: 0775
+        recurse: yes
+
+    - name: Bootstrap edge node with config
+      copy: 
+        dest: "{{ cribl.install_dir}}/local/_system/instance.yml"
+        owner: "{{ cribl.user }}"
+        group: "{{ cribl.group }}"
+        mode: 0644
+        content: |
+          distributed:
+            mode: {{ instance.edge_mode }}
+            master:
+              host: {{ instance.cribl_leader_host }}
+              port: {{ instance.cribl_leader_port }}
+              authToken: "{{ instance.cribl_leader_token }}"
+              tls:
+                disabled: {{ instance.tls_option }}
+              resiliency: {{ instance.resiliency_option }}
+            group: {{ instance.cribl_default_fleet }}
+            tags: []
+
+    - name: Copy cribl-edge systemd service file
+      copy: 
+        dest: "/etc/systemd/system/cribl-edge.service"
+        owner: root
+        group: root
+        mode: 0644
+        content: |
+          [Unit]
+          Description=Systemd service file for Cribl Stream.
+          After=network.target
+
+          [Service]
+          Type=forking
+          User=cribl
+          Restart=always
+          RestartSec=5
+          LimitNOFILE=65536
+          WorkingDirectory=/opt/cribl-edge
+          PIDFile=/opt/cribl-edge/pid/cribl.pid
+          ExecStart=/opt/cribl-edge/bin/cribl start
+          ExecStop=/opt/cribl-edge/bin/cribl stop
+          ExecReload=/opt/cribl-edge/bin/cribl reload
+          TimeoutSec=60
+          Environment=CRIBL_SERVICE=1
+          Environment=CRIBL_SERVICE_NAME=cribl-edge
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Issue daemon-reload to pick up config changes, restart cribl-edge service and enable
+      systemd:
+        daemon_reload: true
+        state: restarted
+        enabled: true
+        name: cribl-edge
+
+    - name: "Message to user"
+      debug:
+        msg: "Cribl Edge Service has been bootstrapped"
