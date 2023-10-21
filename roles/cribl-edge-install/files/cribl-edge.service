@@ -1,0 +1,21 @@
+[Unit]
+Description=Systemd service file for Cribl Stream.
+After=network.target
+
+[Service]
+Type=forking
+User=cribl
+Restart=always
+RestartSec=5
+LimitNOFILE=65536
+WorkingDirectory=/opt/cribl-edge
+PIDFile=/opt/cribl-edge/pid/cribl.pid
+ExecStart=/opt/cribl-edge/bin/cribl start
+ExecStop=/opt/cribl-edge/bin/cribl stop
+ExecReload=/opt/cribl-edge/bin/cribl reload
+TimeoutSec=60
+Environment=CRIBL_SERVICE=1
+Environment=CRIBL_SERVICE_NAME=cribl-edge
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+distributed:
+  mode: {{ instance.edge_mode }}
+  master:
+    host: {{ instance.cribl_leader_host }}
+    port: {{ instance.cribl_leader_port }}
+    authToken: "{{ instance.cribl_leader_token }}"
+    tls:
+      disabled: {{ instance.tls_option }}
+    resiliency: {{ instance.resiliency_option }}
+  group: {{ instance.cribl_default_fleet }}
+  tags: []

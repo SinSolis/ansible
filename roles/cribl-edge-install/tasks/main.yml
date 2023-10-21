@@ -1,0 +1,17 @@
+---
+###############################################################################
+#
+# tasks/main.yml
+#
+# Main tasks file for cribl-edge-install
+#
+###############################################################################
+
+# create the cribl user
+- include_tasks: create-cribl-user.yml
+
+# download cribl package
+- include_tasks: cribl-software.yml
+
+# download cribl package
+- include_tasks: install-cribl-edge.yml

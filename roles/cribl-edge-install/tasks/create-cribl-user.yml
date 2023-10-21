@@ -1,0 +1,23 @@
+---
+###############################################################################
+#
+# tasks/create-user.yml
+#
+# Create the user account cribl for cribl-edge service
+#
+###############################################################################
+
+- name: Create group
+  group:
+    name: cribl
+    state: present
+
+- name: Create user
+  user:
+    name: cribl
+    comment: "account for cribl-edge service"  
+    create_home: yes
+    shell: /bin/sh
+    group: cribl
+    groups: cribl
+    append: yes

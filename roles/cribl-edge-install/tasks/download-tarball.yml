@@ -1,0 +1,32 @@
+---
+###############################################################################
+#
+# tasks/cribl-edge-install.yml
+#
+#
+#
+###############################################################################
+
+- name: Check if cribl tarball exists on controller
+  stat:
+    path: "/tmp/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+  become: no
+  delegate_to: 127.0.0.1
+  register: tarball_result
+
+- name: Download cribl tar ball with check (sha256) to controller
+  get_url:
+    url: "{{ url }}/{{ version }}/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+    dest: "/tmp/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+    checksum: "{{ cribl_tarball_hash }}"
+  become: no
+  delegate_to: 127.0.0.1
+  when: not tarball_result.stat.exists
+
+- name: Copy cribl tarball to target host
+  copy:
+    src: "/tmp/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+    dest: "/tmp/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+    owner: "{{ cribl.user }}"
+    group: "{{ cribl.group }}"
+

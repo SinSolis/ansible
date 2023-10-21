@@ -1,0 +1,35 @@
+---
+###############################################################################
+#
+# defaults/main.yml
+#
+# defaults file for cribl-edge-install
+#
+###############################################################################
+
+# https://cdn.cribl.io/dl/4.2.2/cribl-4.2.2-98ea44f1-linux-x64.tgz
+# cribl-3.2.2-c7466d2a-linux-x64.tgz
+
+url: "https://cdn.cribl.io/dl"
+package_name: "cribl"
+os: "linux"
+version: "4.2.2"
+build: "98ea44f1"
+architecture: "x64"
+extension: "tgz"
+cribl_tarball_hash: "sha256:0969edf8fc0f4fa825b66929bf0cbc9b9f9c0d12be72aef2f26902a1b5714d9b"
+
+cribl:
+  install_dir: "/opt/cribl-edge"
+  user: "cribl"
+  group: "cribl"
+  mode: "0755"
+
+instance:
+  edge_mode: "managed-edge"
+  cribl_leader_host: "192.168.1.51"
+  cribl_leader_port: "4200"
+  cribl_leader_token: "criblmaster"
+  tls_option: "true"
+  resiliency_option: "none"
+  cribl_default_fleet: "default_fleet"

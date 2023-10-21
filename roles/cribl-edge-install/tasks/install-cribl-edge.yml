@@ -1,0 +1,62 @@
+---
+###############################################################################
+#
+# tasks/cribl-rpm.yml
+#
+# Main tasks file for cribl-edge-install
+#
+###############################################################################
+
+- name: Create cribl edge dir
+  file:
+    path: "{{ cribl.install_dir }}"
+    state: directory
+    owner: "{{ cribl.user }}"
+    group: "{{ cribl.group }}"
+    recurse: yes
+    mode: 0755
+
+- name: Unarchive the cribl software to /opt/cribl-edge
+  unarchive:
+    src: "/tmp/{{ package_name }}-{{ version }}-{{ build }}-{{ os }}-{{ architecture }}.{{ extension }}"
+    dest: /opt/cribl-edge
+    remote_src: yes
+    owner: "{{ cribl.user }}"
+    group: "{{ cribl.group }}"
+    extra_opts: [--strip-components=1] 
+
+- name: Creates directory
+  file:
+    path: "{{ cribl.install_dir}}/local/_system/"
+    state: directory
+    owner: "{{ cribl.user }}"
+    group: "{{ cribl.group }}"
+    mode: 0775
+    recurse: yes
+
+- name: Create instance.yml using Jinja2
+  template:
+    src: instance.j2
+    dest: "{{ cribl.install_dir}}/local/_system/instance.yml"
+    owner: "{{ cribl.user }}"
+    group: "{{ cribl.group }}"
+    mode: 0644
+
+- name: Copy cribl-edge systemd service file
+  copy:
+    src: cribl-edge.service
+    dest: "/etc/systemd/system"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Issue daemon-reload to pick up config changes, restart cribl-edge service and enable
+  systemd:
+    daemon_reload: true
+    state: restarted
+    enabled: true
+    name: cribl-edge
+
+- name: "Message to user"
+  debug:
+    msg: "Cribl Edge Service has been bootstrapped"
