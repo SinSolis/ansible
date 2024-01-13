@@ -37,6 +37,10 @@
     update_cache: false
   register: status_plex_repo
 
+# may have to add step here to modify and run /etc/apt/sources.list.d/plexmediaserver.list
+# uncomment last line
+# apt-get update
+
 - name: Install Plex Server
   apt:
     name: plexmediaserver
