@@ -1,7 +1,6 @@
 ---
 
 plex_repo_url: "deb https://downloads.plex.tv/repo/deb public main"
-plex_repo_key: "https://downloads.plex.tv/plex-keys/PlexSign.key"
 
 lvm:
   disks: "/dev/sdb,/dev/sdc,/dev/sdd"

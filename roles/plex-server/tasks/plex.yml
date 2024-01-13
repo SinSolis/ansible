@@ -37,12 +37,6 @@
     update_cache: false
   register: status_plex_repo
 
-- name: Add Plex repository key
-  apt_key:
-    url: "{{ plex_repo_key }}"
-    state: present
-  register: status_plex_repo
-
 - name: Install Plex Server
   apt:
     name: plexmediaserver
