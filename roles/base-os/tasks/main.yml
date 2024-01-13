@@ -8,4 +8,7 @@
 #- import_tasks: packages.yml
 
 # Configure local dns
-- import_tasks: dns.yml
+#- import_tasks: dns.yml
+
+# install tailscale
+- import_tasks: tailscale.yml

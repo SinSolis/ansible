@@ -39,14 +39,14 @@
 # update the capital letters in the path
 # run sonarr
 
-- name: Install sonarr Server
-  apt:
-    name: sonarrmediaserver
-    state: present
-    update_cache: "{{ status_sonarr_repo.changed }}"
+# - name: Install sonarr Server
+#   apt:
+#     name: sonarrmediaserver
+#     state: present
+#     update_cache: "{{ status_sonarr_repo.changed }}"
 
-- name: Start and enable sonarr service
-  systemd:
-    name: sonarr
-    state: started
-    enabled: true
+# - name: Start and enable sonarr service
+#   systemd:
+#     name: sonarr
+#     state: started
+#     enabled: true
