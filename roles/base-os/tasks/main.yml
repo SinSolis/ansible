@@ -2,10 +2,10 @@
 # tasks file for base-os
 
 # apply base system updates
-- import_tasks: updates.yml
+#- import_tasks: updates.yml
 
 # Setup base packages for os
-- import_tasks: packages.yml
+#- import_tasks: packages.yml
 
 # Configure local dns
 - import_tasks: dns.yml
