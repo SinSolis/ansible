@@ -1,0 +1,17 @@
+---
+# tasks file for sonarr / ubuntu
+
+- name: Create group
+  group:
+    name: "{{ sonarr.group }}"
+    state: present
+
+- name: Create user
+  user:
+    name: "{{ sonarr.user }}"
+    comment: "account for sonarr service"  
+    create_home: yes
+    shell: /bin/false
+    group: "{{ sonarr.group }}"
+    groups: "{{ sonarr.group }}"
+    append: yes

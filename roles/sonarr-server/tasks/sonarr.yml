@@ -1,0 +1,45 @@
+---
+# tasks file for sonarr / ubuntu
+
+- name: Create group
+  group:
+    name: "{{ sonarr.group }}"
+    state: present
+
+- name: Create user
+  user:
+    name: "{{ sonarr.user }}"
+    comment: "account for sonarr service"  
+    create_home: yes
+    shell: /bin/false
+    group: "{{ sonarr.group }}"
+    groups: "{{ sonarr.group }}"
+    append: yes
+
+- name: Creates sonarr directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ sonarr.user }}"
+    group: "{{ sonarr.group }}"
+    mode: 0775
+    recurse: yes
+  loop:
+    - /var/lib/Sonarr
+
+# add step to download sonarr
+# unpack sonarr
+# update the capital letters in the path
+# run sonarr
+
+- name: Install sonarr Server
+  apt:
+    name: sonarrmediaserver
+    state: present
+    update_cache: "{{ status_sonarr_repo.changed }}"
+
+- name: Start and enable sonarr service
+  systemd:
+    name: sonarr
+    state: started
+    enabled: true
