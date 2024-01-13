@@ -1,0 +1,9 @@
+---
+
+- name: set juan ssh key
+  copy:
+    src:  /Users/juan/.ssh/id_rsa
+    dest: /home/juan/.ssh
+    owner: juan
+    group: juan
+    mode: 0600
