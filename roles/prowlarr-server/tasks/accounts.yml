@@ -1,0 +1,17 @@
+---
+# tasks file for prowlarr / ubuntu
+
+- name: Create group
+  group:
+    name: "{{ prowlarr.group }}"
+    state: present
+
+- name: Create user
+  user:
+    name: "{{ prowlarr.user }}"
+    comment: "account for prowlarr service"  
+    create_home: yes
+    shell: /bin/false
+    group: "{{ prowlarr.group }}"
+    groups: "{{ prowlarr.group }}"
+    append: yes
