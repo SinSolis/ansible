@@ -2,16 +2,10 @@
 
 sonarr_dl_url: "https://github.com/Sonarr/Sonarr/releases/tag/v4.0.0.748"
 
-lvm:
-  disks: "/dev/sdb,/dev/sdc,/dev/sdd"
-  lvm_vg: "sonarrcorevg"
-  lvm_vol: "sonarrcorevol"
-  grow_size: "100%FREE"
-
 sonarr:
   softwaredir: "/opt/sonarr"
   user: "sonarr"
-  group: "plex"
+  group: "sonarr"
   mode: "0755"
 
 firewall:
