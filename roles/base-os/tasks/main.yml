@@ -6,3 +6,6 @@
 
 # Setup base packages for os
 - import_tasks: packages.yml
+
+# Configure local dns
+- import_tasks: dns.yml

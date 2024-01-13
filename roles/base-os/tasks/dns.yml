@@ -1,0 +1,15 @@
+---
+
+- name: unfuck dns
+  copy:
+    src: resolv.conf
+    dest: /etc/resolv.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: again...unfuck dns 
+  file:
+    src: "/etc/resolv.conf"
+    dest: "/run/systemd/resolve/resolv.conf"
+    state: link

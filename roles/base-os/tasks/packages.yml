@@ -1,5 +1,4 @@
 ---
-# copy prometheus tarball to target host
 
 - name: Install base packages
   package:
