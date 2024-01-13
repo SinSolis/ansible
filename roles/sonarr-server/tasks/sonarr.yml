@@ -27,6 +27,13 @@
   loop:
     - /var/lib/Sonarr
 
+  - name: Download sonarr
+    get_url:
+      url: https://github.com/Sonarr/Sonarr/releases/download/v4.0.0.748/Sonarr.main.4.0.0.748.linux-x64.tar.gz
+      dest: /tmp/
+      mode: '0755'
+
+
 # add step to download sonarr
 # unpack sonarr
 # update the capital letters in the path
