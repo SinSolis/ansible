@@ -1,6 +1,14 @@
 ---
 # tasks file for sonarr / ubuntu
 
+
+- name: Install base packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - sqlite3
+
 - name: Creates sonarr directories
   file:
     path: "{{ item }}"
@@ -40,4 +48,16 @@
   systemd:
     name: sonarr
     state: started
+    enabled: true
+
+- name: Set firewalld ports
+  firewalld:
+    port: 8989/tcp
+    permanent: true
+    state: enabled
+
+- name: Restart firewalld one time
+  systemd:
+    name: firewalld
+    state: restarted
     enabled: true
