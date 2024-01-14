@@ -30,7 +30,7 @@
 
 - name: Unarchive prowlarr
   unarchive:
-    src: /tmp/prowlarr.main.4.0.0.748.linux-x64.tar.gz
+    src: /tmp/Prowlarr.master.1.11.4.4173.linux-core-x64.tar.gz
     dest: /opt/
     remote_src: yes
     owner: "{{ prowlarr.user }}"
