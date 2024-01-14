@@ -52,7 +52,7 @@
 
 - name: Set firewalld ports
   firewalld:
-    port: 8989/tcp
+    port: 9696/tcp
     permanent: true
     state: enabled
 
