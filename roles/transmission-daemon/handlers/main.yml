@@ -1,2 +1,6 @@
 ---
 # handlers file for transmission-daemon
+- name: "transmission-daemon | reload settings"
+  service:
+    name: transmission-daemon
+    state: reloaded

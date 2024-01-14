@@ -1,2 +1,25 @@
 ---
 # defaults file for transmission-daemon
+
+
+transmission_download_dir: "/opt/plex/transmission-daemon/downloads"
+transmission_incomplete_dir: "/opt/plex/transmission-daemon/downloads"
+transmission_config_dir:
+  Debian: /etc/transmission-daemon
+  Ubuntu: /etc/transmission-daemon
+
+transmission_user:
+  Debian: debian-transmission
+  Ubuntu: debian-transmission
+
+transmission_group:
+  Debian: debian-transmission
+  Ubuntu: debian-transmission
+
+transmission_rpc_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          33633235393539313363343265313865363262623062653638663430363034333230353835326362
+          6334363933326235343734316563333632333464323237330a313132626263353965373166363963
+          66383166643436323663633561393033343830343465353364393865646665666233333361326536
+          6665646236643962390a643334373366643664373063386637623334343561343332353736313236
+          61613761363561346233396137396632383930656536653564366539303930346631
