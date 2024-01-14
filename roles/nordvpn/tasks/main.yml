@@ -1,0 +1,30 @@
+---
+# tasks file for nordvpn
+
+- name: Install base packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - apt-transport-https
+
+- name: Download nordvpn gpg key
+  get_url:
+    url: https://repo.nordvpn.com/gpg/nordvpn_public.asc
+    dest: /etc/apt/trusted.gpg.d
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: Set nordvpn deb repo
+  copy:
+    src: nordvpn.list
+    dest: /etc/apt/sources.list.d/
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install nordvpn
+  apt:
+    name: nordvpn
+    state: present
