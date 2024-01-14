@@ -28,3 +28,4 @@
   apt:
     name: nordvpn
     state: present
+    update_cache: true
