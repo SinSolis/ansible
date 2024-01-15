@@ -1,12 +1,12 @@
 ---
 
-- name: Create group
+- name: Create group "{{ plex.group }}"
   group:
     name: "{{ plex.group }}"
     state: present
     gid: "{{ plex.userid }}"
 
-- name: Create user
+- name: Create user "{{ plex.user }}"
   user:
     name: "{{ plex.user }}"
     comment: "account for plex service"  

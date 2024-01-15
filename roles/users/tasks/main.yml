@@ -8,10 +8,22 @@
 - import_tasks: plex-user.yml
 
 # create user
-- import_tasks: prowlarr-user.yml
+- import_tasks: sonarr-user.yml
 
 # create user
-- import_tasks: sonarr-user.yml
+- import_tasks: radarr-user.yml
+
+# create user
+- import_tasks: lidarr-user.yml
+
+# create user
+- import_tasks: redarr-user.yml
+
+# create user
+- import_tasks: whisparr-user.yml
+
+# create user
+- import_tasks: prowlarr-user.yml
 
 # create user
 - import_tasks: transmission-user.yml

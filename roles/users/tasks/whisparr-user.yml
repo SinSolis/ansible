@@ -1,0 +1,18 @@
+---
+
+- name: Create group "{{ whisparr.group }}"
+  group:
+    name: "{{ whisparr.group }}"
+    state: present
+    gid: "{{ whisparr.userid }}"
+
+- name: Create user "{{ whisparr.user }}"
+  user:
+    name: "{{ whisparr.user }}"
+    comment: "account for whisparr service"  
+    create_home: yes
+    shell: /bin/false
+    group: "{{ whisparr.group }}"
+    groups: "{{ whisparr.group }}"
+    append: yes
+    uid: "{{ whisparr.groupid }}"

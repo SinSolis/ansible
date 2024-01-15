@@ -37,29 +37,29 @@ redarr:
   user: "redarr"
   group: "redarr"
   mode: "0755"
-  userid: 1004
-  groupid: 1004
+  userid: 1005
+  groupid: 1005
 
 whisparr:
   softwaredir: "/opt/whisparr"
   user: "whisparr"
   group: "whisparr"
   mode: "0755"
-  userid: 1005
-  groupid: 1005
+  userid: 1006
+  groupid: 1006
 
 prowlarr:
   softwaredir: "/opt/prowlarr"
   user: "prowlarr"
   group: "prowlarr"
   mode: "0755"
-  userid: 1006
-  groupid: 1006
+  userid: 1007
+  groupid: 1007
 
-transmission-daemon:
+transmission:
   softwaredir: "/opt/transmission"
   user: "transmission-daemon"
   group: "transmission-daemon"
   mode: "0755"
-  userid: 1007
-  groupid: 1007
+  userid: 1008
+  groupid: 1008

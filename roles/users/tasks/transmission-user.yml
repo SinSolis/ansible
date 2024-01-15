@@ -1,18 +1,18 @@
 ---
 
-- name: Create group
+- name: Create group "{{ transmission.group }}"
   group:
-    name: "{{ sonarr.group }}"
+    name: "{{ transmission.group }}"
     state: present
-    gid: "{{ sonarr.userid }}"
+    gid: "{{ transmission.userid }}"
 
-- name: Create user
+- name: Create user "{{ transmission.user }}"
   user:
-    name: "{{ sonarr.user }}"
-    comment: "account for sonarr service"  
+    name: "{{ transmission.user }}"
+    comment: "account for transmission service"  
     create_home: yes
     shell: /bin/false
-    group: "{{ sonarr.group }}"
-    groups: "{{ sonarr.group }}"
+    group: "{{ transmission.group }}"
+    groups: "{{ transmission.group }}"
     append: yes
-    uid: "{{ sonarr.groupid }}"
+    uid: "{{ transmission.groupid }}"

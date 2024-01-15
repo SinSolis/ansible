@@ -1,0 +1,18 @@
+---
+
+- name: Create group "{{ radarr.group }}"
+  group:
+    name: "{{ radarr.group }}"
+    state: present
+    gid: "{{ radarr.userid }}"
+
+- name: Create user "{{ radarr.user }}"
+  user:
+    name: "{{ radarr.user }}"
+    comment: "account for radarr service"  
+    create_home: yes
+    shell: /bin/false
+    group: "{{ radarr.group }}"
+    groups: "{{ radarr.group }}"
+    append: yes
+    uid: "{{ radarr.groupid }}"

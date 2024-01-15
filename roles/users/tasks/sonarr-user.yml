@@ -1,12 +1,12 @@
 ---
 
-- name: Create group
+- name: Create group "{{ sonarr.group }}"
   group:
     name: "{{ sonarr.group }}"
     state: present
     gid: "{{ sonarr.userid }}"
 
-- name: Create user
+- name: Create user "{{ sonarr.user }}"
   user:
     name: "{{ sonarr.user }}"
     comment: "account for sonarr service"  

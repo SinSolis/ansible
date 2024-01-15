@@ -1,12 +1,12 @@
 ---
 
-- name: Create group
+- name: Create group "{{ prowlarr.group }}"
   group:
     name: "{{ prowlarr.group }}"
     state: present
     gid: "{{ prowlarr.userid }}"
 
-- name: Create user
+- name: Create user "{{ prowlarr.user }}"
   user:
     name: "{{ prowlarr.user }}"
     comment: "account for prowlarr service"  

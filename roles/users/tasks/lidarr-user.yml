@@ -1,0 +1,18 @@
+---
+
+- name: Create group "{{ lidarr.group }}"
+  group:
+    name: "{{ lidarr.group }}"
+    state: present
+    gid: "{{ lidarr.userid }}"
+
+- name: Create user "{{ lidarr.user }}"
+  user:
+    name: "{{ lidarr.user }}"
+    comment: "account for lidarr service"  
+    create_home: yes
+    shell: /bin/false
+    group: "{{ lidarr.group }}"
+    groups: "{{ lidarr.group }}"
+    append: yes
+    uid: "{{ lidarr.groupid }}"
