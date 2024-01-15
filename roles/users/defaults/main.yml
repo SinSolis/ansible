@@ -1,2 +1,19 @@
 ---
 # defaults file for users
+plex:
+  softwaredir: "/opt/plex"
+  user: "plex"
+  group: "plex"
+  mode: "0755"
+
+prowlarr:
+  softwaredir: "/opt/prowlarr"
+  user: "prowlarr"
+  group: "prowlarr"
+  mode: "0755"
+
+sonarr:
+  softwaredir: "/opt/sonarr"
+  user: "sonarr"
+  group: "sonarr"
+  mode: "0755"

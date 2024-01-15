@@ -1,7 +1,4 @@
 ---
 # tasks file for sonarr-servers
 
-# create accounts
-- import_tasks: accounts.yml
-
 - import_tasks: sonarr.yml

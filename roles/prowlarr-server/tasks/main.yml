@@ -1,7 +1,5 @@
 ---
 # tasks file for prowlarr-servers
 
-# create accounts
-- import_tasks: accounts.yml
-
+# bootstrap prowlarr
 - import_tasks: prowlarr.yml
