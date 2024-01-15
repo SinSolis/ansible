@@ -1,10 +1,10 @@
 ---
-# tasks file for prowlarr / ubuntu
 
 - name: Create group
   group:
     name: "{{ prowlarr.group }}"
     state: present
+    gid: "{{ prowlarr.userid }}"
 
 - name: Create user
   user:
@@ -15,3 +15,4 @@
     group: "{{ prowlarr.group }}"
     groups: "{{ prowlarr.group }}"
     append: yes
+    uid: "{{ prowlarr.groupid }}"

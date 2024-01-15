@@ -2,4 +2,16 @@
 # tasks file for users
 
 # setup ssh to move around (bad juan)
-- import_tasks: ssh.yml
+- import_tasks: juan-ssh.yml
+
+# create user
+- import_tasks: plex-user.yml
+
+# create user
+- import_tasks: prowlarr-user.yml
+
+# create user
+- import_tasks: sonarr-user.yml
+
+# create user
+- import_tasks: transmission-user.yml

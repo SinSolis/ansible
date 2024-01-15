@@ -1,10 +1,10 @@
 ---
-# tasks file for plex / ubuntu
 
 - name: Create group
   group:
     name: "{{ plex.group }}"
     state: present
+    gid: "{{ plex.userid }}"
 
 - name: Create user
   user:
@@ -15,3 +15,4 @@
     group: "{{ plex.group }}"
     groups: "{{ plex.group }}"
     append: yes
+    uid: "{{ plex.groupid }}"
