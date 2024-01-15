@@ -1,2 +1,5 @@
 ---
 # tasks file for users
+
+# setup ssh to move around (bad juan)
+- import_tasks: ssh.yml
