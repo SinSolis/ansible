@@ -5,3 +5,21 @@
       - nfs-common
       - nfs-kernel-server
     state: present
+
+- name: Set firewalld nfs
+  firewalld:
+    service: nfs
+    permanent: true
+    state: enabled
+
+- name: Set firewalld rpc-bind
+  firewalld:
+    service: rpc-bind
+    permanent: true
+    state: enabled
+
+- name: Restart firewalld one time
+  systemd:
+    name: firewalld
+    state: restarted
+    enabled: true
