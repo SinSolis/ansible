@@ -1,0 +1,18 @@
+---
+
+- name: Create group "{{ readarr.group }}"
+  group:
+    name: "{{ readarr.group }}"
+    state: present
+    gid: "{{ readarr.userid }}"
+
+- name: Create user "{{ readarr.user }}"
+  user:
+    name: "{{ readarr.user }}"
+    comment: "account for readarr service"  
+    create_home: yes
+    shell: /bin/false
+    group: "{{ readarr.group }}"
+    groups: "{{ readarr.group }}"
+    append: yes
+    uid: "{{ readarr.groupid }}"

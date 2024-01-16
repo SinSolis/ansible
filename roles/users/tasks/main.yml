@@ -17,7 +17,7 @@
 - import_tasks: lidarr-user.yml
 
 # create user
-- import_tasks: redarr-user.yml
+- import_tasks: readarr-user.yml
 
 # create user
 - import_tasks: whisparr-user.yml

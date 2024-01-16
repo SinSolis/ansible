@@ -32,10 +32,10 @@ lidarr:
   userid: 1004
   groupid: 1004
 
-redarr:
-  softwaredir: "/opt/redarr"
-  user: "redarr"
-  group: "redarr"
+readarr:
+  softwaredir: "/opt/readarr"
+  user: "readarr"
+  group: "readarr"
   mode: "0755"
   userid: 1005
   groupid: 1005
