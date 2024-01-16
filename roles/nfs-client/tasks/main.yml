@@ -1,0 +1,23 @@
+---
+# tasks file for nfs-client
+
+- name: Install base packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - nfs-common
+
+- name: Create a directory under opt for the mount point
+  file:
+    path: /opt/remote
+    state: directory
+    mode: '0775'
+
+- name: Mount the nfs volume on the client
+  mount:
+    src: lab01.lab:/opt/plex
+    path: /opt/remote
+    opts: intr
+    state: mounted
+    fstype: nfs
