@@ -22,7 +22,7 @@
 
 - name: Download readarr
   get_url:
-    url: readarr_dl_url
+    url: "{{ readarr_dl_url }}"
     dest: /tmp/
     mode: '0644'
     owner: "{{ readarr.user }}"
