@@ -1,6 +1,5 @@
 ---
-nfs_exports: []
-nfs_exports: [ "/opt    *(rw,sync,no_root_squash)" ]
+nfs_exports: [ "/opt/plex    *(rw,sync)" ]
 
 nfs_rpcbind_state: started
 nfs_rpcbind_enabled: true
