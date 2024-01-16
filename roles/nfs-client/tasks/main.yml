@@ -18,6 +18,6 @@
   mount:
     src: lab01.lab:/opt/plex
     path: /opt/remote
-    opts: intr
+    opts: nolock,intr
     state: mounted
     fstype: nfs

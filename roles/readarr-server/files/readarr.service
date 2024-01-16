@@ -3,7 +3,7 @@ Description=Readarr Daemon
 After=syslog.target network.target
 [Service]
 User=readarr
-Group=media
+Group=readarr
 Type=simple
 
 ExecStart=/opt/Readarr/Readarr -nobrowser -data=/var/lib/readarr/
@@ -12,4 +12,3 @@ KillMode=process
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
-EOF
