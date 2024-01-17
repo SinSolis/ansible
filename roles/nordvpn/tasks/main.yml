@@ -29,3 +29,13 @@
     name: nordvpn
     state: present
     update_cache: true
+
+- name: Set nordvpn firewall off 
+  command: nordvpn set firewall disabled
+
+- name: Set nordvpn lan-discovery enabled
+  command: nordvpn set lan-discovery enable
+  ignore_errors: true
+
+- name: Authenticate to nordvpn
+  command: nordvpn login --token "{{ nordvpn_token }}"
