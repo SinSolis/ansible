@@ -13,7 +13,8 @@
     - name: Remove any leftover splunk uf artifacts
       file: 
         path: "{{ item }}"
+        state: absent
       with_items:
-        - "/opt/splunkforwarder"
-        - "/etc/init.d/splunk"
-        - "/etc/systemd/system/SplunkForwarder.service"
+        - /opt/splunkforwarder
+        - /etc/init.d/splunk
+        - /etc/systemd/system/SplunkForwarder.service
