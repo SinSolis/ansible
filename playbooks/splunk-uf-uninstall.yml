@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+
+  tasks:
+
+    - name: Remove splunk uf package
+      apt:
+        name: splunkforwarder
+        state: absent
+
+    - name: Remove any leftover splunk uf artifacts
+      file: 
+        path: "{{ item }}"
+      with_items:
+        - "/opt/splunkforwarder"
+        - "/etc/init.d/splunk"
+        - "/etc/systemd/system/SplunkForwarder.service"
