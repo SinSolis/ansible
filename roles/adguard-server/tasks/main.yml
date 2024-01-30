@@ -44,9 +44,10 @@
 
 - name: Set firewalld ports
   firewalld:
-    port: "{{ firewall.rules.allow }}"
+    port: "{{ item }}"
     permanent: true
     state: enabled
+  loop: "{{ firewall.rules.allow }}"
 
 - name: Restart firewalld one time
   systemd:
