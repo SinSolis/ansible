@@ -12,4 +12,3 @@ firewall:
   rules:
     allow:
       - 8989/tcp
-
