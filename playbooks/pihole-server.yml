@@ -1,0 +1,14 @@
+---
+- hosts: pihole01
+  become: true
+
+  tasks:
+    - name: Add services to firewall
+      firewalld:
+        service: "{{ item }}"
+        permanent: yes
+        state: enabled
+      loop:
+        - http
+        - dns
+        - dhcp

@@ -1,10 +1,13 @@
-[controllers]
-controller ansible_connection=local
+#[controllers]
+#controller ansible_connection=local
 
-[nodes]
-node01
-node02
+[media]
 plex01
+
+[lab]
 lab01
 lab02
 lab03
+
+[pihole]
+pihole01
