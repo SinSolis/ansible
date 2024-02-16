@@ -1,0 +1,61 @@
+---
+- name: Add Docker systemd service
+  become: true
+  ansible.builtin.template:
+    src: "{{ docker_rootful_service_template }}"
+    dest: /etc/systemd/system/docker.service
+    mode: "0644"
+    owner: root
+    group: root
+
+- name: Disable rootful Docker daemon
+  become: true
+  ansible.builtin.systemd:
+    name: docker
+    state: stopped
+    enabled: false
+  when: not docker_rootful_enabled
+
+- name: Enable rootful Docker daemon
+  become: true
+  ansible.builtin.systemd:
+    name: docker
+    state: started
+    enabled: true
+  when: docker_rootful_enabled
+
+- name: Stat Docker user docker.sock
+  become: true
+  become_user: "{{ docker_user }}"
+  ansible.builtin.stat:
+    path: /run/user/{{ docker_user_info.uid }}/docker.sock
+  register: docker_rootless_sock
+
+- name: Load the ip_tables module
+  become: true
+  community.general.modprobe:
+    name: ip_tables
+    state: present
+
+- name: Install rootless Docker
+  become: true
+  become_user: "{{ docker_user }}"
+  environment:
+    PATH: "{{ docker_user_info.home }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    XDG_RUNTIME_DIR: /run/user/{{ docker_user_info.uid }}
+  ansible.builtin.command:
+    cmd: dockerd-rootless-setuptool.sh install
+  register: install_rootless_docker
+  changed_when: install_rootless_docker.rc != 0
+  failed_when: install_rootless_docker.rc != 0
+  when: not docker_rootless_sock.stat.exists
+
+- name: Enable and start Docker (rootful installation)
+  become: true
+  become_user: "{{ docker_user }}"
+  ansible.builtin.systemd:
+    name: docker.service
+    enabled: true
+    state: started
+    scope: user
+    daemon_reload: true
