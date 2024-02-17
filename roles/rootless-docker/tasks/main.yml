@@ -3,6 +3,10 @@
   import_tasks: packages.yml
   tags: packages
 
+- name: modprobe loads
+  import_tasks: modprobe.yml
+  tags: modprobe
+
 - name: Configure sysctl
   import_tasks: sysctl.yml
   tags: sysctl

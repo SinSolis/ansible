@@ -37,3 +37,21 @@
     sysctl_set: true
     state: present
     reload: true
+
+- name: Set net.bridge.bridge-nf-call-ip6tables
+  become: true
+  sysctl:
+    name: net.bridge.bridge-nf-call-ip6tables
+    value: "1"
+    sysctl_set: true
+    state: present
+    reload: true
+
+- name: Set net.bridge.bridge-nf-call-iptables
+  become: true
+  sysctl:
+    name: net.bridge.bridge-nf-call-iptables
+    value: "1"
+    sysctl_set: true
+    state: present
+    reload: true

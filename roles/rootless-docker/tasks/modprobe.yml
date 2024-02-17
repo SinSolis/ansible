@@ -1,0 +1,6 @@
+---
+
+- name: Load br_netfilter kernel module
+  modprobe:
+    name: br_netfilter
+  become: true
