@@ -4,7 +4,7 @@
   become_user: "{{ docker_user }}"
   block:
     - name: Add .bash_completion script
-      ansible.builtin.copy:
+      copy:
         src: bash_completion
         dest: "{{ docker_user_home }}/.bash_completion"
         owner: "{{ docker_user }}"
@@ -12,7 +12,7 @@
         mode: "0750"
 
     - name: Create user bash completion dir
-      ansible.builtin.file:
+      file:
         path: "{{ docker_user_home }}/.bash_completion.d"
         state: directory
         owner: "{{ docker_user }}"
@@ -20,14 +20,14 @@
         mode: "0750"
 
     - name: Install docker bash completion
-      ansible.builtin.get_url:
+      get_url:
         url: https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker
         dest: "{{ docker_user_home }}/.bash_completion.d/"
         checksum: sha256:{{ docker_bash_completion_shasum }}
         mode: "0644"
 
     - name: Extend Docker user bashrc config
-      ansible.builtin.blockinfile:
+      blockinfile:
         path: "{{ docker_user_home }}/.bashrc"
         owner: "{{ docker_user }}"
         group: "{{ docker_user }}"

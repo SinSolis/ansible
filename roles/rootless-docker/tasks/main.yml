@@ -11,6 +11,10 @@
   import_tasks: sysctl.yml
   tags: sysctl
 
+- name: Configure systemd resource management
+  import_tasks: delegate.yml
+  tags: delegate
+
 - name: Install and configure Docker rootless
   import_tasks: rootless-docker.yml
   tags: rootless
