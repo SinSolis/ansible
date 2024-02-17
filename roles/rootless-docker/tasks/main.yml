@@ -15,51 +15,8 @@
   import_tasks: rootless-compose.yml
   tags: compose
 
-# - name: Add user sudo alias
-#   vars:
-#     sudo_alias: >
-#       alias docker='sudo XDG_RUNTIME_DIR="/run/user/{{ docker_user_info.uid }}"
-#       DOCKER_HOST="unix:///run/user/{{ docker_user_info.uid }}/docker.sock"
-#       {{ docker_user_info.home }}/bin/docker'
-#   when: docker_add_alias | bool and not docker_rootful
-#   tags:
-#     - docker_rootful
-#     - docker_rootless
-#     - docker_compose
-#   block:
-#     - name: Stat .bashrc
-#       ansible.builtin.stat:
-#         path: "{{ ansible_env.HOME }}/.bashrc"
-#       register: user_bashrc
-
-#     - name: Check if .bash_aliases is used
-#       ansible.builtin.command: grep -q '.bash_aliases' "{{ ansible_env.HOME }}/.bashrc"
-#       register: check_aliases
-#       changed_when: check_aliases.rc >= 2
-#       failed_when: check_aliases.rc >= 2
-#       when: user_bashrc.stat.exists
-
-#     - name: Add rootless Docker alias to .bash_aliases
-#       ansible.builtin.lineinfile:
-#         path: "{{ ansible_env.HOME }}/.bash_aliases"
-#         line: "{{ sudo_alias }}"
-#         regexp: ^alias docker=
-#         state: present
-#         create: true
-#         mode: "0640"
-#       when: check_aliases.rc == 0 and user_bashrc.stat.exists and not docker_rootful
-
-#     - name: Add rootless Docker alias to .bashrc
-#       ansible.builtin.lineinfile:
-#         path: "{{ ansible_env.HOME }}/.bashrc"
-#         line: "{{ sudo_alias }}"
-#         regexp: ^alias docker=
-#       when: user_bashrc.stat.exists and check_aliases.rc != 0 and not docker_rootful
+- name: Deploy bash aliases
+  import_tasks: bash_aliases.yml
 
 - name: Deploy bash completion
-  ansible.builtin.import_tasks:
-    file: bashrc.yml
-  when: docker_user_bashrc
-  tags:
-    - docker_rootful
-    - docker_rootless
+  import_tasks: bashrc.yml

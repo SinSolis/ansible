@@ -1,0 +1,10 @@
+---
+
+- name: Extend primary users .bash_aliases config
+  become: true
+  lineinfile:
+    line: alias docker='sudo XDG_RUNTIME_DIR="/run/user/{{ docker_user_uid }}" DOCKER_HOST="unix:///run/user/{{ docker_user_uid }}/docker.sock" {{ docker_user_home }}/bin/docker'
+    path: "{{ ansible_env.HOME }}/.bash_aliases"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: "0644"
