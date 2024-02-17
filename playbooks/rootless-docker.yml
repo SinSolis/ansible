@@ -1,4 +1,18 @@
 ---
-- hosts: all
-  roles:
-    - rootless-docker
+- name: first play with elevated privs
+  hosts: all
+  become: true
+  tasks:
+    - include_role:
+        name: base-os
+
+    - name: Install docker-user only from users role
+      include_role:
+        name: users
+        tasks_from: docker-user.yml
+
+- name: second play as ansible user and some elevated privs
+  hosts: all
+  tasks:
+    - include_role:
+        name: rootless-docker

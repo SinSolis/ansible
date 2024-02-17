@@ -2,13 +2,13 @@
 # tasks file for base-os
 
 # apply base system updates
-- import_tasks: updates.yml
+- include_tasks: updates.yml
 
 # Setup base packages for os
-- import_tasks: packages.yml
+- include_tasks: packages.yml
 
 # Configure local dns - moving over to dns server
-#- import_tasks: dns.yml
+#- include_tasks: dns.yml
 
 # install tailscale
-- import_tasks: tailscale.yml
+- include_tasks: tailscale.yml

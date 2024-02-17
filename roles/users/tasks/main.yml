@@ -2,32 +2,32 @@
 # tasks file for users
 
 # setup ssh to move around (bad juan)
-- import_tasks: juan-ssh.yml
+- include_tasks: juan-ssh.yml
 
 # create user
-- import_tasks: plex-user.yml
+- include_tasks: plex-user.yml
 
 # create user
-- import_tasks: sonarr-user.yml
+- include_tasks: sonarr-user.yml
 
 # create user
-- import_tasks: radarr-user.yml
+- include_tasks: radarr-user.yml
 
 # create user
-- import_tasks: lidarr-user.yml
+- include_tasks: lidarr-user.yml
 
 # create user
-- import_tasks: readarr-user.yml
+- include_tasks: readarr-user.yml
 
 # create user
-- import_tasks: whisparr-user.yml
+- include_tasks: whisparr-user.yml
 
 # create user
-- import_tasks: prowlarr-user.yml
+- include_tasks: prowlarr-user.yml
 
 # create user
-- import_tasks: transmission-user.yml
+- include_tasks: transmission-user.yml
 
 # create user
-- import_tasks: docker-user.yml
+- include_tasks: docker-user.yml
   tags: docker
