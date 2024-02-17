@@ -2,4 +2,4 @@
 # tasks file for prowlarr-servers
 
 # bootstrap prowlarr
-- import_tasks: prowlarr.yml
+- include_tasks: prowlarr.yml

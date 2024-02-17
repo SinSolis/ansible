@@ -2,9 +2,9 @@
 # tasks file for plex-servers
 
 # Setup base packages for os
-- import_tasks: vm-disk.yml
+- include_tasks: vm-disk.yml
 
 # apply base system updates
-- import_tasks: plex.yml
+- include_tasks: plex.yml
   #when: ansible_distribution == "Ubuntu"
 

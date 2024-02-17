@@ -1,4 +1,4 @@
 ---
 # tasks file for sonarr-servers
 
-- import_tasks: sonarr.yml
+- include_tasks: sonarr.yml

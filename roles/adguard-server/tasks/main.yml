@@ -2,7 +2,7 @@
 # tasks file for adguard-server
 
 # unscrew dns again
-- import_tasks: dns.yml
+- include_tasks: dns.yml
 
 # Setup basic adguard
-- import_tasks: adguard.yml
+- include_tasks: adguard.yml

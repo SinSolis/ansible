@@ -2,4 +2,4 @@
 # tasks file for readarr-servers
 
 # bootstrap readarr
-- import_tasks: readarr.yml
+- include_tasks: readarr.yml
