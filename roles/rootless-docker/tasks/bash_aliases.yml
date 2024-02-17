@@ -1,5 +1,15 @@
 ---
 
+- name: Ensure .bash_aliases exists
+  become: true
+  file:
+    path: "{{ ansible_env.HOME }}/.bash_aliases"
+    state: touch
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: "0644"
+
+
 - name: Extend primary users .bash_aliases config
   become: true
   lineinfile:

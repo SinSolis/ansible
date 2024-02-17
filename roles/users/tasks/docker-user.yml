@@ -35,12 +35,3 @@
   register: enable_lingering
   changed_when: enable_lingering.rc != 0
   failed_when: enable_lingering.rc != 0
-
-- name: Create Docker user Ansible tmp dir
-  file:
-    path: "/home/docker/.ansible/tmp"
-    state: directory
-    mode: "0700"
-    owner: docker
-    group: docker
-    recurse: true
