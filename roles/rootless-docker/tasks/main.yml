@@ -20,3 +20,7 @@
 
 - name: Deploy bash completion
   import_tasks: bashrc.yml
+
+- name: Configure data disk
+  import_tasks: data-disk.yml
+  tags: disk

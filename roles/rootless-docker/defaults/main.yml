@@ -1,6 +1,5 @@
 ---
-# https://github.com/docker/roadmap/issues/188
-# https://download.docker.com/linux/static/stable/x86_64/{docker,docker-rootless-extras}-25.0.3.tgz
+
 docker_add_alias: true
 docker_allow_ping: true
 docker_allow_privileged_ports: true
@@ -24,14 +23,12 @@ docker_url: https://download.docker.com/linux/static/stable/x86_64
 docker_user_bashrc: true
 docker_user: docker
 
-
-
 data:
   disk: "/dev/sdb"
-  dir: "data"
-  owner: docker
+  dir: "/data"
+  user: docker
   group: docker
 
-
+# get this via ansible facts
 docker_user_home: "/home/docker"
 docker_user_uid: "1009"
