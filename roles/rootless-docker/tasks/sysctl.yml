@@ -1,0 +1,39 @@
+---
+
+- name: Sysctl net.ipv4.ip_forward
+  become: true
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: "1"
+    sysctl_set: true
+    state: present
+    reload: true
+
+- name: Sysctl net.ipv4.ip_unprivileged_port_start=0
+  become: true
+  sysctl:
+    name: net.ipv4.ip_unprivileged_port_start
+    value: "0"
+    sysctl_set: true
+    state: present
+    reload: true
+  when: docker_allow_privileged_ports
+
+- name: Sysctl net.ipv4.ping_group_range=0 2147483647
+  become: true
+  sysctl:
+    name: net.ipv4.ping_group_range
+    value: "0 2147483647"
+    sysctl_set: true
+    state: present
+    reload: true
+  when: docker_allow_ping
+
+- name: Sysctl user.max_user_namespaces=28633
+  become: true
+  sysctl:
+    name: user.max_user_namespaces
+    value: "28633"
+    sysctl_set: true
+    state: present
+    reload: true

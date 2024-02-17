@@ -1,0 +1,23 @@
+---
+
+- name: Install Debian family packages
+  become: true
+  apt:
+    name:
+      - acl
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - dbus-user-session
+      - gnupg
+      - iptables
+      - libpam-systemd
+      - lsb-release
+      - python3-docker
+      - python3-pexpect
+      - python3-pip
+      - python3-six
+      - slirp4netns
+      - uidmap
+    state: present
+    install_recommends: false

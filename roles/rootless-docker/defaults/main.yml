@@ -2,7 +2,7 @@
 # https://github.com/docker/roadmap/issues/188
 # https://download.docker.com/linux/static/stable/x86_64/{docker,docker-rootless-extras}-25.0.3.tgz
 docker_add_alias: true
-docker_allow_ping: false
+docker_allow_ping: true
 docker_allow_privileged_ports: true
 docker_bash_completion_shasum: 241df3ad4a3396b2447f8f83ccc17241717ab82dcc89eea71f9c1c13f376a12f
 docker_compose: true
@@ -31,3 +31,7 @@ data:
   dir: "data"
   owner: docker
   group: docker
+
+
+docker_user_home: "/home/docker"
+docker_user_uid: "1009"

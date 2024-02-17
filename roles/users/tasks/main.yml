@@ -27,3 +27,7 @@
 
 # create user
 - import_tasks: transmission-user.yml
+
+# create user
+- import_tasks: docker-user.yml
+  tags: docker

@@ -1,0 +1,46 @@
+---
+
+- name: Create group "{{ docker.group }}"
+  group:
+    name: "{{ docker.group }}"
+    state: present
+    gid: "{{ docker.userid }}"
+
+- name: Create user "{{ docker.user }}"
+  user:
+    name: "{{ docker.user }}"
+    comment: "account for docker service"  
+    create_home: yes
+    shell: /bin/bash
+    group: "{{ docker.group }}"
+    groups: "{{ docker.group }}"
+    append: yes
+    uid: "{{ docker.groupid }}"
+
+- name: Adding Docker user to systemd-journal group
+  become: true
+  user:
+    name: "{{ docker.user }}"
+    groups: systemd-journal
+    append: true
+
+- name: Ensure Docker user is lingering
+  stat:
+    path: /var/lib/systemd/linger/{{ docker.user }}
+
+- name: Enable lingering for the Docker user
+  become: true
+  command:
+    cmd: loginctl enable-linger {{ docker.user }}
+  register: enable_lingering
+  changed_when: enable_lingering.rc != 0
+  failed_when: enable_lingering.rc != 0
+
+- name: Create Docker user Ansible tmp dir
+  file:
+    path: "/home/docker/.ansible/tmp"
+    state: directory
+    mode: "0700"
+    owner: docker
+    group: docker
+    recurse: true

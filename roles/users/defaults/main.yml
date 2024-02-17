@@ -63,3 +63,11 @@ transmission:
   mode: "0755"
   userid: 1008
   groupid: 1008
+
+docker:
+  softwaredir: "/home/docker/bin"
+  user: "docker"
+  group: "docker"
+  mode: "0755"
+  userid: 1009
+  groupid: 1009
