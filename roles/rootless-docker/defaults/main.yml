@@ -23,3 +23,11 @@ docker_service_restart: true
 docker_url: https://download.docker.com/linux/static/stable/x86_64
 docker_user_bashrc: true
 docker_user: docker
+
+
+
+data:
+  disk: "/dev/sdb"
+  dir: "data"
+  owner: docker
+  group: docker

@@ -1,0 +1,41 @@
+---
+
+- name: Create mount directory if it does not exist
+  file:
+    path: "{{ data.dir }}"
+    state: directory
+    owner: docker
+    group: docker 
+    mode: 0700
+
+- name: Create xfs filesystem on the volume
+  filesystem:
+    fstype: xfs
+    dev: "{{ data.disk }}"
+
+# Mount the volume
+- name: Mount the volume
+  tags: mount
+  mount:
+    src: "{{ data_disk }}"
+    path: "{{ data.dir }}"
+    fstype: xfs
+    state: mounted
+
+# Needs to be remounted so perms take
+- name: re-mount the volume
+  tags: mount
+  mount:
+    src: "{{ data_disk }}"
+    path: "{{ data.dir }}"
+    fstype: xfs
+    state: remounted
+
+# Force owner change
+- name: Recursively change ownership on dir
+  file:
+    path: "{{ data.dir }}"
+    state: directory
+    recurse: yes
+    owner: "{{ data.user }}"
+    group: "{{ data.group }}"
