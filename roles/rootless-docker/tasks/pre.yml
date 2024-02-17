@@ -39,50 +39,6 @@
         (ansible_kernel is version("4.18", ">=") and
         ansible_kernel is version("5.11", "<="))
 
-- name: RedHat family dependencies
-  become: true
-  when: ansible_os_family == "RedHat"
-  block:
-    - name: Install RedHat family packages
-      ansible.builtin.dnf:
-        name: [curl, iptables, python3-pip]
-        state: present
-
-    - name: Install RedHat family slirp4netns
-      ansible.builtin.dnf:
-        name: slirp4netns
-        state: present
-      when: ansible_distribution != "Amazon"
-
-    - name: Install slirp4netns binary
-      ansible.builtin.get_url:
-        url: https://github.com/rootless-containers/slirp4netns/releases/download/v1.2.3/slirp4netns-x86_64
-        dest: /usr/bin/slirp4netns
-        checksum: sha256:2051ae25baba59c96f42bf2b7b7efa2eabb022e497b6c4b692b1428d2b2d1f5b
-        owner: root
-        group: root
-        mode: "0755"
-      when: ansible_distribution == "Amazon"
-
-    - name: Python3-rpm installation
-      ansible.builtin.dnf:
-        name: python3-rpm
-        state: present
-      when: ansible_distribution == "RedHat"
-
-    - name: Install python3 setuptools
-      ansible.builtin.dnf:
-        name: python3-setuptools
-        state: present
-      when: ansible_distribution == "AlmaLinux"
-
-    - name: Install python3 docker
-      ansible.builtin.pip:
-        name:
-          - docker
-          - urllib3<2
-        state: present
-
 - name: Sysctl net.ipv4.ip_forward
   become: true
   ansible.posix.sysctl:
