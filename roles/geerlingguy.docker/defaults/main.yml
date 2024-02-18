@@ -57,3 +57,10 @@ docker_users:
 
 # Docker daemon options as a dict
 docker_daemon_options: {}
+
+# data 
+data:
+  disk: "/dev/sdb"
+  dir: "/data"
+  user: juan
+  group: juan

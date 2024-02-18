@@ -96,3 +96,7 @@
 
 - include_tasks: docker-users.yml
   when: at_least_one_user_to_modify is defined
+
+- name: Configure data disk
+  include_tasks: data-disk.yml
+  tags: disk
