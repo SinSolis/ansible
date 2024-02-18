@@ -13,3 +13,6 @@ lab05
 
 [pihole]
 pihole01
+
+[docker]
+docker01

@@ -11,6 +11,11 @@
         name: users
         tasks_from: docker-user.yml
 
+    - name: Install the juan and only user
+      include_role:
+        name: users
+        tasks_from: juan-ssh.yml
+
 - name: second play as ansible user and some elevated privs
   hosts: all
   tasks:

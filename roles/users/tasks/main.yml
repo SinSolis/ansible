@@ -5,7 +5,8 @@
 - include_tasks: juan-ssh.yml
 
 # create user
-- include_tasks: plex-user.yml
+- import_tasks: plex-user.yml
+  tags: plex
 
 # create user
 - include_tasks: sonarr-user.yml
