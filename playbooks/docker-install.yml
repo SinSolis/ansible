@@ -1,4 +1,15 @@
 - hosts: all
   become: true
-  roles:
-    - geerlingguy.docker
+  tasks:
+    - name: base os configs
+      include_role:
+        name: base-os
+
+    - name: Install Docker + set disks
+      include_role:
+        name: geerlingguy.docker
+
+    - name: Install the juan and only user
+      include_role:
+        name: users
+        tasks_from: juan-ssh.yml
