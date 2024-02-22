@@ -7,6 +7,7 @@ packages:
   - htop
   - tree
   - net-tools
+  - iostat
 
 # tailscale clean up
 release_stability: stable
