@@ -16,3 +16,6 @@ pihole01
 
 [docker]
 docker01
+
+[bastion]
+jump01
