@@ -12,3 +12,11 @@
 - name: Upgrade the OS (apt-get dist-upgrade)
   apt:
     upgrade: dist
+
+# fix the error Failed to connect to https://changelogs.ubuntu.com/meta-release-lts
+- name: Reinstall ubuntu-release-upgrader-core
+  apt:
+    name: ubuntu-release-upgrader-core
+    state: present
+    force: yes
+    update_cache: yes
