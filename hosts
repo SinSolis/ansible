@@ -16,6 +16,7 @@ pihole01
 
 [docker]
 docker01
+docker02
 
 [bastion]
 jump01

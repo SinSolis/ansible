@@ -3,7 +3,7 @@
 plex_repo_url: "deb https://downloads.plex.tv/repo/deb public main"
 
 lvm:
-  disks: "/dev/sdb,/dev/sdc,/dev/sdd"
+  disks: "/dev/sdb"
   lvm_vg: "plexcorevg"
   lvm_vol: "plexcorevol"
   grow_size: "100%FREE"
