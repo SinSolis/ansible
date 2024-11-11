@@ -65,6 +65,9 @@
   when: docker_daemon_options.keys() | length > 0
   notify: restart docker
 
+- name: Reboot the machine one time
+  reboot:
+
 - name: Ensure Docker is started and enabled at boot.
   service:
     name: docker
